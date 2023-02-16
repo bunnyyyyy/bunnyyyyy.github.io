@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Bird</title>
+  <script>
+    
+    function getRandomBird() {
+        var randomIndex = Math.floor(Math.random() * 40) + 1;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'birdlist.txt', false);
+        xhr.send();
+
+        var birdList = xhr.responseText.split('\n');
+        return birdList[randomIndex - 1];
+        //returns bird name
+    }
+
+    // function to load the bird image
+    function loadBirdImage(birdName) {
+      var imagePath = 'links/' + birdName + '.txt';
+      var imageElement = document.getElementById('bird-image');
+      imageElement.src = imagePath;
+    }
+
+    // function to handle the "Get Random Bird" button click event
+    function handleButtonClick() {
+      var birdName = getRandomBird();
+      loadBirdImage(birdName);
+    }
+  </script>
+</head>
+<body>
+  <h1>Random Bird</h1>
+  <p>Click the button to get a random bird image:</p>
+  <button onclick="handleButtonClick()">Get Random Bird</button>
+  <br>
+  <img id="bird-image" src="">
+</body>
+</html>
