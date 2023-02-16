@@ -19,8 +19,16 @@
     // function to load the bird image
     function loadBirdImage(birdName) {
       var imagePath = 'links/' + birdName + '.txt';
-      var imageElement = document.getElementById('bird-image');
-      imageElement.src = imagePath;
+
+      var randomIndex = Math.floor(Math.random() * 50) + 1;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', imagePath, false);
+        xhr.send();
+
+        var birdList = xhr.responseText.split('\n');
+        return birdList[randomIndex - 1];
+        //returns link
     }
 
     // function to handle the "Get Random Bird" button click event
@@ -35,6 +43,6 @@
   <p>Click the button to get a random bird image:</p>
   <button onclick="handleButtonClick()">Get Random Bird</button>
   <br>
-  <img id="bird-image" src="">
+  <img src="image link" />
 </body>
 </html>
