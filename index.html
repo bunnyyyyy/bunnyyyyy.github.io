@@ -3,48 +3,42 @@
 <head>
   <title>Random Bird</title>
   <script>
+    
     function getRandomBird() {
-        var lineNumber = Math.floor(Math.random() * 40) + 1;
+        var randomIndex = Math.floor(Math.random() * 40) + 1;
 
-        return fetch('birdlist.txt')
-          .then(response => response.text())
-          .then(data => {
-            const lines = data.split('\n');
-            return lines[lineNumber - 1];
-          })
-          .catch(error => console.error(error));
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'birdlist.txt', false);
+        xhr.send();
+
+        var birdList = xhr.responseText.split('\n');
+        return birdList[randomIndex - 1];
+        //returns bird name
     }
 
+   
     function getLink() {
-      return getRandomBird()
-        .then(birdName => {
-          var imagePath = 'links/' + birdName + '.txt';
-          var lineNumber = Math.floor(Math.random() * 50) + 1;
+      var birdName = getRandomBird()
+      var imagePath = 'links/' + birdName + '.txt';
 
-          return fetch(imagePath)
-            .then(response => response.text())
-            .then(data => {
-              const lines = data.split('\n');
-              return lines[lineNumber - 1];
-            })
-            .catch(error => console.error(error));
-        })
-        .catch(error => console.error(error));
+      var randomIndex = Math.floor(Math.random() * 50) + 1;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', imagePath, false);
+        xhr.send();
+
+        var links = xhr.responseText.split('\n');
+        return links[randomIndex - 1];
+        //returns the link
     }
 
-    function displayImage() {
-      getLink().then(imageLink => {
-        var imgElement = document.querySelector('img');
-        imgElement.setAttribute('src', imageLink);
-      });
-    }
 
   </script>
 </head>
-<body onload="displayImage()">
+<body>
   <h1>Random Bird</h1>
-  <p>Have fun!</p>
+  <p>Click the button to get a random bird image:</p>
   <br>
-  <img>
+  <img src=getLink()/>
 </body>
 </html>
