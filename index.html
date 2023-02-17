@@ -30,8 +30,9 @@
       }
       fclose(file);
 
-      return link
-     //returns the link
+        var imgElement = document.querySelector('img');
+        imgElement.setAttribute('src', link);
+        //displays the image
     }
 
 
@@ -41,6 +42,6 @@
   <h1>Random Bird</h1>
   <p>Click the button to get a random bird image:</p>
   <br>
-  <img src=getLink()/>
+  <button onclick="getLink()">click me!</button>
 </body>
 </html>
