@@ -12,7 +12,7 @@
         xhr.send();
 
         var birdList = xhr.responseText.split('\n');
-        return birdList[randomIndex - 1];
+        return birdList[randomIndex - 1].trim();
         //returns bird name
     }
 
@@ -23,13 +23,15 @@
 
       var randomIndex = Math.floor(Math.random() * 50) + 1;
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', imagePath, false);
-        xhr.send();
+      file = fopen(imagePath, 0);
+      for (let i = 0; i < randomIndex; i++) {
+        var link = fgets(file);
+        links.push(line);
+      }
+      fclose(file);
 
-        var links = xhr.responseText.split('\n');
-        return links[randomIndex - 1];
-        //returns the link
+      return link
+     //returns the link
     }
 
 
